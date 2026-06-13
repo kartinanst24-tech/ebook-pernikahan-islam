@@ -3,1042 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pernikahan Dalam Islam</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<title>E-Book Flipbook</title>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
 <style>
-  :root {
-    --gold:       #C9A84C;
-    --gold-light: #E8D08A;
-    --gold-pale:  #F7EED3;
-    --green-deep: #1A3A2A;
-    --green-mid:  #2E6047;
-    --green-soft: #EBF3EE;
-    --ink:        #1C1C1C;
-    --muted:      #5A5A5A;
-    --bg:         #FDFAF4;
-    --white:      #FFFFFF;
-  }
+body{
+    margin:0;
+    background:#e5e5e5;
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+#flipbook{
+    width:1000px;
+    height:650px;
+}
 
-  body {
-    font-family: 'Lato', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.8;
-  }
+.page{
+    background:white;
+    padding:40px;
+    box-sizing:border-box;
+    overflow:auto;
+}
 
-  /* ── COVER ── */
-  .cover {
-    min-height: 100vh;
-    background: linear-gradient(160deg, var(--green-deep) 0%, #0F2318 60%, #1A3A2A 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 40px;
-    position: relative;
-    overflow: hidden;
-  }
+.cover{
+    background:linear-gradient(135deg,#1A3A2A,#0F2318);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
 
-  .cover::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
-  }
+.cover h1{
+    font-size:48px;
+    margin-bottom:20px;
+}
 
-  .cover-ornament {
-    font-family: 'Scheherazade New', serif;
-    font-size: 80px;
-    color: var(--gold);
-    opacity: 0.6;
-    line-height: 1;
-    margin-bottom: 24px;
-    letter-spacing: 12px;
-  }
+.cover p{
+    font-size:18px;
+}
 
-  .cover-bismillah {
-    font-family: 'Scheherazade New', serif;
-    font-size: 36px;
-    color: var(--gold-light);
-    margin-bottom: 40px;
-    text-shadow: 0 2px 12px rgba(201,168,76,0.3);
-  }
+.chapter-title{
+    color:#1A3A2A;
+    border-bottom:2px solid #C9A84C;
+    padding-bottom:10px;
+    margin-bottom:20px;
+}
 
-  .cover-line {
-    width: 80px;
-    height: 2px;
-    background: var(--gold);
-    margin: 0 auto 32px;
-  }
-
-  .cover h1 {
-    font-family: 'Amiri', serif;
-    font-size: clamp(36px, 6vw, 64px);
-    color: var(--white);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 16px;
-    letter-spacing: 1px;
-  }
-
-  .cover h1 span {
-    color: var(--gold);
-  }
-
-  .cover-subtitle {
-    font-size: 16px;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 48px;
-    font-weight: 300;
-  }
-
-  .cover-badge {
-    display: inline-block;
-    border: 1px solid rgba(201,168,76,0.5);
-    border-radius: 3px;
-    padding: 10px 28px;
-    color: var(--gold-light);
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  /* ── PAGE LAYOUT ── */
-  .page {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 60px 40px;
-  }
-
-  /* ── CHAPTER HEADER ── */
-  .chapter-header {
-    text-align: center;
-    padding: 80px 40px 48px;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    margin-bottom: 48px;
-    position: relative;
-  }
-
-  .chapter-label {
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-
-  .chapter-header h2 {
-    font-family: 'Amiri', serif;
-    font-size: clamp(28px, 4vw, 44px);
-    color: var(--green-deep);
-    line-height: 1.25;
-    font-weight: 700;
-  }
-
-  .chapter-ornament {
-    font-family: 'Scheherazade New', serif;
-    font-size: 32px;
-    color: var(--gold);
-    margin-top: 20px;
-    opacity: 0.7;
-  }
-
-  /* ── SECTION HEADING ── */
-  .section-title {
-    font-family: 'Amiri', serif;
-    font-size: 24px;
-    color: var(--green-deep);
-    margin: 48px 0 16px;
-    padding-left: 16px;
-    border-left: 3px solid var(--gold);
-  }
-
-  /* ── BODY TEXT ── */
-  p {
-    margin-bottom: 18px;
-    color: var(--ink);
-    font-size: 15.5px;
-  }
-
-  /* ── AYAT BOX ── */
-  .ayat-box {
-    background: var(--green-deep);
-    border-radius: 8px;
-    padding: 32px 36px;
-    margin: 32px 0;
-    text-align: center;
-  }
-
-  .ayat-arabic {
-    font-family: 'Scheherazade New', serif;
-    font-size: 28px;
-    color: var(--gold-light);
-    line-height: 1.8;
-    margin-bottom: 16px;
-    direction: rtl;
-  }
-
-  .ayat-terjemah {
-    font-size: 14px;
-    color: rgba(255,255,255,0.75);
-    font-style: italic;
-    line-height: 1.7;
-  }
-
-  .ayat-source {
-    font-size: 12px;
-    color: var(--gold);
-    margin-top: 10px;
-    letter-spacing: 1px;
-  }
-
-  /* ── HADIS BOX ── */
-  .hadis-box {
-    background: var(--gold-pale);
-    border-left: 4px solid var(--gold);
-    border-radius: 0 6px 6px 0;
-    padding: 24px 28px;
-    margin: 28px 0;
-  }
-
-  .hadis-box .hadis-text {
-    font-family: 'Amiri', serif;
-    font-size: 17px;
-    color: var(--green-deep);
-    font-style: italic;
-    line-height: 1.9;
-    margin-bottom: 8px;
-  }
-
-  .hadis-source {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.5px;
-  }
-
-  /* ── INFO CARDS ── */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 32px 0;
-  }
-
-  .card {
-    background: var(--white);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 8px;
-    padding: 24px 20px;
-    text-align: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-
-  .card-icon {
-    font-size: 28px;
-    margin-bottom: 10px;
-  }
-
-  .card-title {
-    font-family: 'Amiri', serif;
-    font-size: 17px;
-    color: var(--green-deep);
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  /* ── NUMBERED LIST ── */
-  .num-list {
-    list-style: none;
-    margin: 20px 0 28px;
-  }
-
-  .num-list li {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 16px;
-    align-items: flex-start;
-  }
-
-  .num-badge {
-    min-width: 32px;
-    height: 32px;
-    background: var(--green-deep);
-    color: var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .num-list li p {
-    margin: 0;
-    font-size: 15px;
-  }
-
-  .num-list li strong {
-    color: var(--green-deep);
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    text-align: center;
-    margin: 56px 0;
-    color: var(--gold);
-    font-size: 22px;
-    letter-spacing: 12px;
-    opacity: 0.5;
-  }
-
-  /* ── HIGHLIGHT BOX ── */
-  .highlight {
-    background: var(--green-soft);
-    border-radius: 8px;
-    padding: 24px 28px;
-    margin: 28px 0;
-    border: 1px solid rgba(46,96,71,0.15);
-  }
-
-  .highlight h4 {
-    font-family: 'Amiri', serif;
-    color: var(--green-mid);
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .highlight p {
-    font-size: 14.5px;
-    color: var(--muted);
-    margin: 0;
-  }
-
-  /* ── TOC ── */
-  .toc {
-    background: var(--white);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 10px;
-    padding: 36px 40px;
-    margin: 40px 0;
-  }
-
-  .toc h3 {
-    font-family: 'Amiri', serif;
-    font-size: 22px;
-    color: var(--green-deep);
-    margin-bottom: 24px;
-    text-align: center;
-  }
-
-  .toc-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px dashed rgba(201,168,76,0.3);
-    font-size: 14.5px;
-  }
-
-  .toc-item:last-child { border-bottom: none; }
-
-  .toc-num {
-    color: var(--gold);
-    font-weight: 700;
-    margin-right: 12px;
-    font-size: 13px;
-  }
-
-  .toc-title { color: var(--green-deep); flex: 1; }
-
-  .toc-page {
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  /* ── PENUTUP ── */
-  .closing {
-    background: linear-gradient(135deg, var(--green-deep), #0F2318);
-    color: white;
-    text-align: center;
-    padding: 80px 40px;
-    margin-top: 60px;
-  }
-
-  .closing .closing-arabic {
-    font-family: 'Scheherazade New', serif;
-    font-size: 40px;
-    color: var(--gold-light);
-    margin-bottom: 20px;
-  }
-
-  .closing h3 {
-    font-family: 'Amiri', serif;
-    font-size: 28px;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-
-  .closing p {
-    color: rgba(255,255,255,0.65);
-    font-size: 15px;
-    max-width: 520px;
-    margin: 0 auto 8px;
-  }
-
-  .closing-line {
-    width: 60px;
-    height: 1px;
-    background: var(--gold);
-    margin: 24px auto;
-  }
-
-  @media print {
-    .cover { page-break-after: always; min-height: auto; padding: 80px 40px; }
-    .chapter-header { page-break-before: always; }
-  }
-
-  @media (max-width: 600px) {
-    .page { padding: 40px 24px; }
-    .cover { padding: 40px 24px; }
-    .ayat-box { padding: 24px 20px; }
-    .cards { grid-template-columns: 1fr 1fr; }
-  }
+.page-number{
+    position:absolute;
+    bottom:15px;
+    right:20px;
+    color:#888;
+    font-size:12px;
+}
 </style>
 </head>
+
 <body>
 
-<!-- ══════════════════════════════════════
-     COVER
-══════════════════════════════════════ -->
-<div class="cover">
-  <div class="cover-ornament">❧</div>
-  <div class="cover-bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
-  <div class="cover-line"></div>
-  <h1>Pernikahan<br><span>Dalam Islam</span></h1>
-  <p class="cover-subtitle">Panduan Lengkap Menuju Keluarga Sakinah</p>
-  <div class="cover-badge">Edisi Edukasi · 2025</div>
-</div>
+<div id="flipbook">
 
-<!-- ══════════════════════════════════════
-     DAFTAR ISI
-══════════════════════════════════════ -->
-<div class="page">
-  <div class="toc">
-    <h3>📖 Daftar Isi</h3>
-    <div class="toc-item"><span><span class="toc-num">01</span><span class="toc-title">Pendahuluan — Makna Pernikahan</span></span><span class="toc-page">Bab I</span></div>
-    <div class="toc-item"><span><span class="toc-num">02</span><span class="toc-title">Hukum & Tujuan Pernikahan</span></span><span class="toc-page">Bab II</span></div>
-    <div class="toc-item"><span><span class="toc-num">03</span><span class="toc-title">Rukun & Syarat Pernikahan</span></span><span class="toc-page">Bab III</span></div>
-    <div class="toc-item"><span><span class="toc-num">04</span><span class="toc-title">Mahram & Wanita yang Haram Dinikahi</span></span><span class="toc-page">Bab IV</span></div>
-    <div class="toc-item"><span><span class="toc-num">05</span><span class="toc-title">Ta'aruf — Proses Pra-Nikah Islami</span></span><span class="toc-page">Bab V</span></div>
-    <div class="toc-item"><span><span class="toc-num">06</span><span class="toc-title">Hak & Kewajiban Suami Istri</span></span><span class="toc-page">Bab VI</span></div>
-    <div class="toc-item"><span><span class="toc-num">07</span><span class="toc-title">Membangun Keluarga Sakinah</span></span><span class="toc-page">Bab VII</span></div>
-    <div class="toc-item"><span><span class="toc-num">08</span><span class="toc-title">Penutup & Doa</span></span><span class="toc-page">Penutup</span></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     BAB I
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Bab I</div>
-  <h2>Makna & Hakikat Pernikahan</h2>
-  <div class="chapter-ornament">﷽</div>
-</div>
-
-<div class="page">
-  <div class="ayat-box">
-    <div class="ayat-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا</div>
-    <div class="ayat-terjemah">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya…"</div>
-    <div class="ayat-source">QS. Ar-Rum: 21</div>
-  </div>
-
-  <p>Pernikahan dalam Islam bukan sekadar ikatan sosial atau perjanjian antara dua manusia. Ia adalah sebuah <em>mitsaqan ghalidza</em> — perjanjian yang kokoh dan agung — yang disaksikan oleh Allah SWT, malaikat, serta seluruh keluarga yang hadir. Islam menempatkan pernikahan sebagai bagian dari fitrah manusia dan jalan menuju kesempurnaan separuh agama.</p>
-
-  <p>Kata nikah dalam bahasa Arab berasal dari akar kata yang berarti "menghimpun" atau "menyatukan." Secara syar'i, nikah adalah akad yang menghalalkan pergaulan antara laki-laki dan perempuan yang bukan mahram, serta menimbulkan hak dan kewajiban timbal balik di antara keduanya.</p>
-
-  <div class="hadis-box">
-    <div class="hadis-text">"Wahai para pemuda, barangsiapa di antara kalian yang mampu menikah, maka menikahlah. Karena sesungguhnya menikah itu lebih dapat menundukkan pandangan dan lebih menjaga kemaluan."</div>
-    <div class="hadis-source">HR. Bukhari & Muslim — dari Abdullah bin Mas'ud RA</div>
-  </div>
-
-  <p>Rasulullah ﷺ menjadikan pernikahan sebagai sunnahnya yang mulia. Beliau bersabda bahwa menikah adalah bagian dari sunnahnya, dan siapa yang berpaling darinya tanpa alasan syar'i, maka ia bukan dari golongan beliau. Inilah yang menjadikan pernikahan memiliki dimensi ibadah yang sangat dalam.</p>
-</div>
-
-<div class="divider">✦ ✦ ✦</div>
-
-<!-- ══════════════════════════════════════
-     BAB II
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Bab II</div>
-  <h2>Hukum & Tujuan Pernikahan</h2>
-  <div class="chapter-ornament">﷽</div>
-</div>
-
-<div class="page">
-  <h3 class="section-title">Hukum Menikah</h3>
-  <p>Para ulama fiqih membagi hukum menikah menjadi lima, tergantung kondisi seseorang:</p>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">✅</div>
-      <div class="card-title">Wajib</div>
-      <div class="card-desc">Bila seseorang sangat khawatir jatuh ke dalam zina jika tidak menikah, dan telah mampu.</div>
+    <!-- COVER -->
+    <div class="page cover">
+        <h1>Pernikahan Dalam Islam</h1>
+        <p>Panduan Lengkap Menuju Keluarga Sakinah</p>
     </div>
-    <div class="card">
-      <div class="card-icon">⭐</div>
-      <div class="card-title">Sunnah</div>
-      <div class="card-desc">Bagi yang sudah mampu dan memiliki hasrat, ini adalah hukum asal pernikahan.</div>
+
+    <!-- DAFTAR ISI -->
+    <div class="page">
+        <h2 class="chapter-title">Daftar Isi</h2>
+
+        <p>Bab I - Makna & Hakikat Pernikahan</p>
+        <p>Bab II - Hukum & Tujuan Pernikahan</p>
+        <p>Bab III - Rukun & Syarat Pernikahan</p>
+        <p>Bab IV - Mahram & Wanita yang Haram Dinikahi</p>
+        <p>Bab V - Ta'aruf</p>
+        <p>Bab VI - Hak & Kewajiban Suami Istri</p>
+        <p>Bab VII - Membangun Keluarga Sakinah</p>
+
+        <div class="page-number">2</div>
     </div>
-    <div class="card">
-      <div class="card-icon">⚖️</div>
-      <div class="card-title">Mubah</div>
-      <div class="card-desc">Bila tidak ada dorongan kuat, namun juga tidak ada halangan.</div>
+
+    <!-- BAB 1 -->
+    <div class="page">
+        <h2 class="chapter-title">Bab I</h2>
+
+        <h3>Makna & Hakikat Pernikahan</h3>
+
+        <p>
+            Tempel isi Bab I di sini.
+        </p>
+
+        <div class="page-number">3</div>
     </div>
-    <div class="card">
-      <div class="card-icon">⚠️</div>
-      <div class="card-title">Makruh</div>
-      <div class="card-desc">Bila belum mampu nafkah secara lahir batin.</div>
+
+    <!-- BAB 2 -->
+    <div class="page">
+        <h2 class="chapter-title">Bab II</h2>
+
+        <h3>Hukum & Tujuan Pernikahan</h3>
+
+        <p>
+            Tempel isi Bab II di sini.
+        </p>
+
+        <div class="page-number">4</div>
     </div>
-    <div class="card">
-      <div class="card-icon">🚫</div>
-      <div class="card-title">Haram</div>
-      <div class="card-desc">Bila niatnya untuk menyakiti atau merugikan pasangan.</div>
+
+    <!-- BAB 3 -->
+    <div class="page">
+        <h2 class="chapter-title">Bab III</h2>
+
+        <h3>Rukun & Syarat Pernikahan</h3>
+
+        <p>
+            Tempel isi Bab III di sini.
+        </p>
+
+        <div class="page-number">5</div>
     </div>
-  </div>
 
-  <h3 class="section-title">Tujuan Pernikahan</h3>
-  <ul class="num-list">
-    <li><div class="num-badge">1</div><p><strong>Menjaga Keturunan (Hifzun Nasl):</strong> Memastikan kelangsungan generasi manusia dalam jalur yang halal dan terhormat.</p></li>
-    <li><div class="num-badge">2</div><p><strong>Menjaga Kehormatan (Hifzul 'Irdh):</strong> Menjauhkan diri dari perbuatan zina dan segala bentuk penyimpangan moral.</p></li>
-    <li><div class="num-badge">3</div><p><strong>Meraih Ketenangan (Sakinah):</strong> Mendapatkan ketenangan jiwa, kasih sayang, dan cinta yang tulus bersama pasangan.</p></li>
-    <li><div class="num-badge">4</div><p><strong>Menyempurnakan Ibadah:</strong> Pernikahan menjadikan banyak aktifitas harian bernilai ibadah di sisi Allah.</p></li>
-    <li><div class="num-badge">5</div><p><strong>Memperluas Silaturahmi:</strong> Menyambung tali persaudaraan antar keluarga dan umat Islam.</p></li>
-  </ul>
-</div>
+    <!-- KUIS -->
+    <div class="page">
+        <h2 class="chapter-title">Evaluasi</h2>
 
-<div class="divider">✦ ✦ ✦</div>
+        <p>
+            Tempel kuis Anda di sini.
+        </p>
 
-<!-- ══════════════════════════════════════
-     BAB III
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Bab III</div>
-  <h2>Rukun & Syarat Pernikahan</h2>
-  <div class="chapter-ornament">﷽</div>
-</div>
-
-<div class="page">
-  <p>Sebuah pernikahan dinyatakan sah secara Islam apabila terpenuhi rukun dan syaratnya. Rukun adalah unsur utama yang wajib ada, sedangkan syarat adalah ketentuan yang harus dipenuhi pada setiap rukun tersebut.</p>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">👰</div>
-      <div class="card-title">Calon Mempelai</div>
-      <div class="card-desc">Laki-laki dan perempuan yang memenuhi syarat, bukan mahram, dan keduanya rela.</div>
+        <div class="page-number">6</div>
     </div>
-    <div class="card">
-      <div class="card-icon">🧔</div>
-      <div class="card-title">Wali Nikah</div>
-      <div class="card-desc">Wali nasab (ayah, kakak, paman) yang adil dan berakal. Wali hakim bila tidak ada.</div>
+
+    <!-- PENUTUP -->
+    <div class="page">
+        <h2 class="chapter-title">Penutup</h2>
+
+        <p>
+            Rabbana hab lana min azwajina wa dzurriyyatina qurrata a'yun...
+        </p>
+
+        <div class="page-number">7</div>
     </div>
-    <div class="card">
-      <div class="card-icon">👥</div>
-      <div class="card-title">Dua Saksi</div>
-      <div class="card-desc">Dua orang Muslim laki-laki yang adil, baligh, dan memahami isi akad.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🤝</div>
-      <div class="card-title">Ijab & Qabul</div>
-      <div class="card-desc">Serah terima akad yang jelas, bersambung, dan dilakukan dalam satu majelis.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">💍</div>
-      <div class="card-title">Mahar</div>
-      <div class="card-desc">Pemberian wajib dari suami kepada istri, sesuai kemampuan dan kesepakatan.</div>
-    </div>
-  </div>
 
-  <div class="highlight">
-    <h4>📌 Tentang Mahar</h4>
-    <p>Mahar adalah hak penuh milik istri. Islam tidak membatasi jumlahnya — yang penting mahar bukan rekayasa, dan tidak memberatkan. Rasulullah ﷺ bersabda bahwa sebaik-baik mahar adalah yang paling mudah (tidak memberatkan). Mahar bisa berupa emas, uang, hafalan Al-Qur'an, atau benda lain yang bernilai.</p>
-  </div>
 </div>
-
-<div class="divider">✦ ✦ ✦</div>
-
-<!-- ══════════════════════════════════════
-     BAB IV
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Bab IV</div>
-  <h2>Mahram & Wanita yang Haram Dinikahi</h2>
-  <div class="chapter-ornament">﷽</div>
-</div>
-
-<div class="page">
-  <p>Islam secara tegas menetapkan batasan siapa saja yang tidak boleh dinikahi. Ini disebut sebagai wanita yang haram dinikahi, dan dibagi menjadi dua kategori: haram selamanya (muabbad) dan haram sementara (ghairu muabbad).</p>
-
-  <h3 class="section-title">Haram Selamanya</h3>
-  <ul class="num-list">
-    <li><div class="num-badge">1</div><p><strong>Sebab Nasab:</strong> Ibu, nenek, anak perempuan, saudara perempuan, bibi (dari ayah/ibu), keponakan perempuan.</p></li>
-    <li><div class="num-badge">2</div><p><strong>Sebab Pernikahan (Mushaharah):</strong> Ibu mertua, anak tiri (bila sudah berhubungan dengan ibunya), istri bapak, istri anak.</p></li>
-    <li><div class="num-badge">3</div><p><strong>Sebab Persusuan (Radha'):</strong> Ibu susuan dan semua yang haram karena nasab berlaku pula pada jalur persusuan.</p></li>
-  </ul>
-
-  <h3 class="section-title">Haram Sementara</h3>
-  <p>Haram sementara artinya boleh dinikahi setelah kondisi tertentu berakhir, misalnya: wanita yang masih bersuami, wanita dalam masa iddah, wanita yang sudah ditalak tiga hingga menikah dengan pria lain secara sah, serta poligami di atas empat istri sekaligus.</p>
-</div>
-
-<div class="divider">✦ ✦ ✦</div>
-
-<!-- ══════════════════════════════════════
-     BAB V
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Bab V</div>
-  <h2>Ta'aruf — Proses Pra-Nikah Islami</h2>
-  <div class="chapter-ornament">﷽</div>
-</div>
-
-<div class="page">
-  <p>Ta'aruf berasal dari kata <em>ta'aarafa</em> yang berarti saling mengenal. Dalam konteks pernikahan, ta'aruf adalah proses perkenalan antara calon pasangan dengan cara yang syar'i — terjaga dari khalwat (berduaan), menjaga pandangan, dan didampingi mahram.</p>
-
-  <div class="ayat-box">
-    <div class="ayat-arabic">يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا</div>
-    <div class="ayat-terjemah">"Wahai manusia! Sungguh Kami telah menciptakan kamu dari seorang laki-laki dan seorang perempuan, kemudian Kami jadikan kamu berbangsa-bangsa dan bersuku-suku agar kamu saling mengenal…"</div>
-    <div class="ayat-source">QS. Al-Hujurat: 13</div>
-  </div>
-
-  <h3 class="section-title">Tahapan Ta'aruf yang Sehat</h3>
-  <ul class="num-list">
-    <li><div class="num-badge">1</div><p><strong>Niat yang Lurus:</strong> Pastikan tujuan adalah menikah, bukan sekadar berkenalan atau mengisi waktu.</p></li>
-    <li><div class="num-badge">2</div><p><strong>Melibatkan Keluarga:</strong> Segera libatkan orang tua atau wali sejak awal proses.</p></li>
-    <li><div class="num-badge">3</div><p><strong>Mengenal Akhlak & Agama:</strong> Fokus pada karakter, ketakwaan, dan visi hidup, bukan hanya penampilan.</p></li>
-    <li><div class="num-badge">4</div><p><strong>Batasi Komunikasi Privat:</strong> Hindari chat berdua yang berlebihan. Utamakan pertemuan formal bersama mahram.</p></li>
-    <li><div class="num-badge">5</div><p><strong>Istikharah:</strong> Selalu libatkan Allah lewat shalat istikharah dalam setiap keputusan.</p></li>
-  </ul>
-
-  <div class="highlight">
-    <h4>💡 Pacaran vs. Ta'aruf</h4>
-    <p>Pacaran dalam pengertian umum tidak dikenal dalam Islam. Islam menyediakan ta'aruf sebagai jalan yang lebih bermartabat: mengenal calon pasangan dengan niat serius untuk menikah, dengan pengawasan keluarga, tanpa kontak fisik yang tidak halal. Ta'aruf menjaga kehormatan kedua pihak dan mengurangi risiko kekecewaan akibat ekspektasi yang tidak realistis.</p>
-  </div>
-</div>
-
-<div class="divider">✦ ✦ ✦</div>
-
-<!-- ══════════════════════════════════════
-     BAB VI
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Bab VI</div>
-  <h2>Hak & Kewajiban Suami Istri</h2>
-  <div class="chapter-ornament">﷽</div>
-</div>
-
-<div class="page">
-  <h3 class="section-title">Kewajiban Suami</h3>
-  <ul class="num-list">
-    <li><div class="num-badge">1</div><p><strong>Memberi Nafkah Lahir:</strong> Menyediakan sandang, pangan, papan yang layak sesuai kemampuan.</p></li>
-    <li><div class="num-badge">2</div><p><strong>Memberi Nafkah Batin:</strong> Memenuhi kebutuhan biologis istri dengan cara yang baik.</p></li>
-    <li><div class="num-badge">3</div><p><strong>Memperlakukan Istri dengan Baik (Mu'asyarah bil Ma'ruf):</strong> Berlaku lembut, tidak menyakiti hati maupun fisik istri.</p></li>
-    <li><div class="num-badge">4</div><p><strong>Membimbing Agama Keluarga:</strong> Menjadi imam dalam ibadah dan pendidikan Islam di rumah.</p></li>
-  </ul>
-
-  <div class="ayat-box">
-    <div class="ayat-arabic">وَعَاشِرُوهُنَّ بِالْمَعْرُوفِ</div>
-    <div class="ayat-terjemah">"Dan bergaullah dengan mereka (para istri) secara patut."</div>
-    <div class="ayat-source">QS. An-Nisa: 19</div>
-  </div>
-
-  <h3 class="section-title">Kewajiban Istri</h3>
-  <ul class="num-list">
-    <li><div class="num-badge">1</div><p><strong>Taat kepada Suami dalam Kebaikan:</strong> Mematuhi suami dalam hal yang tidak bertentangan dengan syariat.</p></li>
-    <li><div class="num-badge">2</div><p><strong>Menjaga Kehormatan Diri & Rumah:</strong> Menjaga amanah suami saat ia tidak ada, baik harta maupun kehormatan.</p></li>
-    <li><div class="num-badge">3</div><p><strong>Mendidik Anak:</strong> Berperan aktif dalam tumbuh kembang dan pendidikan anak-anak.</p></li>
-    <li><div class="num-badge">4</div><p><strong>Menjadi Sumber Ketenangan:</strong> Menciptakan suasana rumah yang nyaman dan penuh kasih sayang.</p></li>
-  </ul>
-
-  <div class="hadis-box">
-    <div class="hadis-text">"Sebaik-baik wanita adalah yang menyenangkan suami jika ia memandangnya, taat kepada suami jika ia memerintahnya, dan tidak menyelisihi suami dalam hal yang dibenci pada dirinya dan hartanya."</div>
-    <div class="hadis-source">HR. An-Nasa'i — dari Abu Hurairah RA</div>
-  </div>
-</div>
-
-<div class="divider">✦ ✦ ✦</div>
-
-<!-- ══════════════════════════════════════
-     BAB VII
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Bab VII</div>
-  <h2>Membangun Keluarga Sakinah</h2>
-  <div class="chapter-ornament">﷽</div>
-</div>
-
-<div class="page">
-  <p>Sakinah, mawaddah, warahmah — tiga kata indah yang menjadi doa dan cita-cita setiap pasangan Muslim. <em>Sakinah</em> berarti ketenangan; <em>mawaddah</em> berarti cinta yang menggebu; dan <em>rahmah</em> berarti kasih sayang yang lembut dan tulus. Ketiganya saling melengkapi dalam rumah tangga yang harmonis.</p>
-
-  <h3 class="section-title">Pilar Keluarga Sakinah</h3>
-
-  <ul class="num-list">
-    <li><div class="num-badge">1</div><p><strong>Pondasi Takwa:</strong> Rumah tangga yang dibangun di atas ketakwaan kepada Allah adalah fondasi paling kuat. Pasangan yang sama-sama menjalankan shalat, membaca Al-Qur'an, dan saling mengingatkan dalam kebaikan akan lebih tahan menghadapi ujian hidup.</p></li>
-    <li><div class="num-badge">2</div><p><strong>Komunikasi yang Jujur & Penuh Hormat:</strong> Banyak masalah rumah tangga berakar dari komunikasi yang buruk. Islam mengajarkan untuk bicara dengan lemah lembut, mendengarkan dengan sabar, dan tidak memendam amarah berlarut-larut.</p></li>
-    <li><div class="num-badge">3</div><p><strong>Saling Memaafkan:</strong> Tidak ada manusia yang sempurna. Pasangan yang kuat adalah yang mampu memaafkan kesalahan satu sama lain dan tidak mengungkit masa lalu.</p></li>
-    <li><div class="num-badge">4</div><p><strong>Musyawarah dalam Keputusan:</strong> Keputusan besar dalam keluarga — keuangan, pendidikan anak, tempat tinggal — sebaiknya diambil bersama melalui musyawarah yang penuh kasih sayang.</p></li>
-    <li><div class="num-badge">5</div><p><strong>Waktu Berkualitas Bersama:</strong> Di tengah kesibukan dunia, sisihkan waktu untuk ibadah bersama, makan malam bersama, dan berbicara dari hati ke hati.</p></li>
-  </ul>
-
-  <div class="highlight">
-    <h4>🏡 Rumah adalah Surgamu</h4>
-    <p>Rasulullah ﷺ bersabda bahwa seorang mukmin yang paling sempurna imannya adalah yang paling baik akhlaknya, dan yang paling baik di antara kalian adalah yang paling baik kepada istrinya. Jadikanlah rumah sebagai tempat ternyaman bagi setiap anggota keluarga — tempat berlindung dari kelelahan dunia dan mengisi energi untuk kembali beribadah kepada Allah.</p>
-  </div>
-
-  <h3 class="section-title">Menghadapi Konflik Rumah Tangga</h3>
-  <p>Setiap rumah tangga pasti mengalami ujian dan konflik. Islam tidak mengajarkan kita untuk menghindari konflik, melainkan menghadapinya dengan bijaksana. Beberapa langkah yang diajarkan Al-Qur'an ketika terjadi nusyuz (ketidakharmonisan) adalah: nasihat dengan lembut, pisah ranjang sementara, dan jika sangat diperlukan, mediasi dari perwakilan kedua keluarga.</p>
-
-  <p>Perceraian adalah pintu terakhir yang dibenci Allah, namun tetap dibuka sebagai jalan keluar yang bermartabat bila memang tidak ada jalan lain. Ini menunjukkan betapa Islam sangat menghargai kemaslahatan kedua belah pihak.</p>
-</div>
-
-<!-- ══════════════════════════════════════
-     SOAL EVALUASI
-══════════════════════════════════════ -->
-<div class="chapter-header">
-  <div class="chapter-label">Evaluasi</div>
-  <h2>Soal Latihan — Kelas XI SMA</h2>
-  <div class="chapter-ornament">✦</div>
-</div>
-
-<div class="page">
-  <div class="highlight" style="margin-bottom:32px;">
-    <h4>📋 Petunjuk Pengerjaan</h4>
-    <p>Pilih satu jawaban yang paling tepat untuk setiap soal. Klik pada pilihan jawabanmu, lalu klik <strong>"Periksa Jawaban"</strong> di akhir untuk melihat skor dan pembahasan. Selamat mengerjakan!</p>
-  </div>
-
-  <div id="quiz-container"></div>
-
-  <div style="text-align:center; margin: 40px 0 20px;">
-    <button id="btn-check" onclick="checkAnswers()" style="
-      background: var(--green-deep);
-      color: var(--gold-light);
-      border: none;
-      padding: 14px 48px;
-      font-size: 15px;
-      font-family: 'Lato', sans-serif;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      border-radius: 4px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: background 0.2s;
-    " onmouseover="this.style.background='#2E6047'" onmouseout="this.style.background='var(--green-deep)'">
-      Periksa Jawaban
-    </button>
-    <button onclick="resetQuiz()" style="
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid #ccc;
-      padding: 14px 32px;
-      font-size: 14px;
-      font-family: 'Lato', sans-serif;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-left: 12px;
-      letter-spacing: 1px;
-    ">
-      Ulangi
-    </button>
-  </div>
-
-  <div id="result-box" style="display:none; margin: 0 0 40px;"></div>
-</div>
-
-<style>
-  .q-block {
-    background: var(--white);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 10px;
-    padding: 28px 28px 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-  .q-num {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-  .q-text {
-    font-family: 'Amiri', serif;
-    font-size: 18px;
-    color: var(--green-deep);
-    margin-bottom: 18px;
-    line-height: 1.5;
-  }
-  .q-options { list-style: none; }
-  .q-options li {
-    margin-bottom: 10px;
-  }
-  .q-options label {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px 16px;
-    border: 1.5px solid #e0d9c8;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14.5px;
-    color: var(--ink);
-    transition: border-color 0.15s, background 0.15s;
-    line-height: 1.5;
-  }
-  .q-options label:hover { border-color: var(--gold); background: var(--gold-pale); }
-  .q-options input[type=radio] { display: none; }
-  .q-options input[type=radio]:checked + label {
-    border-color: var(--green-mid);
-    background: var(--green-soft);
-    font-weight: 700;
-    color: var(--green-deep);
-  }
-  .opt-letter {
-    min-width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--gold-pale);
-    color: var(--green-deep);
-    font-weight: 700;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .q-feedback {
-    margin-top: 14px;
-    padding: 12px 16px;
-    border-radius: 6px;
-    font-size: 13.5px;
-    line-height: 1.6;
-    display: none;
-  }
-  .q-feedback.correct { background: #d4edda; color: #1a5c2a; border-left: 4px solid #28a745; }
-  .q-feedback.wrong   { background: #fde8e8; color: #7a1e1e; border-left: 4px solid #dc3545; }
-  .result-box-inner {
-    background: var(--green-deep);
-    color: white;
-    border-radius: 10px;
-    padding: 36px 40px;
-    text-align: center;
-  }
-  .result-score {
-    font-family: 'Amiri', serif;
-    font-size: 64px;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .result-label {
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .result-msg {
-    font-size: 16px;
-    color: rgba(255,255,255,0.85);
-    max-width: 420px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-</style>
 
 <script>
-const questions = [
-  {
-    q: "Pernikahan dalam Islam disebut sebagai <em>mitsaqan ghalidza</em>, yang artinya…",
-    opts: ["Perjanjian yang mudah dibubarkan","Perjanjian yang kokoh dan agung","Ikatan sosial yang bersifat sementara","Kontrak bisnis antara dua keluarga"],
-    ans: 1,
-    explain: "Mitsaqan ghalidza (مِيثَاقًا غَلِيظًا) berarti perjanjian yang kokoh dan agung. Istilah ini digunakan Al-Qur'an dalam QS. An-Nisa: 21 untuk menggambarkan betapa seriusnya ikatan pernikahan dalam Islam."
-  },
-  {
-    q: "Menurut para ulama fiqih, hukum menikah menjadi <strong>wajib</strong> apabila…",
-    opts: ["Seseorang sudah berusia 17 tahun","Orang tua meminta anaknya segera menikah","Seseorang sangat khawatir jatuh ke dalam zina dan telah mampu","Seseorang sudah memiliki pekerjaan tetap"],
-    ans: 2,
-    explain: "Hukum menikah berubah menjadi wajib ketika seseorang sangat khawatir akan terjerumus dalam zina jika tidak segera menikah, dan ia sudah mampu secara materi maupun mental untuk menikah."
-  },
-  {
-    q: "Berikut ini yang termasuk rukun nikah adalah…",
-    opts: ["Mahar, ijab-qabul, pesta pernikahan, dan restu tetangga","Calon mempelai, wali nikah, dua saksi, dan ijab-qabul","Calon mempelai, mahar emas, pesta walimah, dan KUA","Wali nikah, maskawin, surat nikah, dan penghulu"],
-    ans: 1,
-    explain: "Rukun nikah ada 5: calon mempelai (pria dan wanita), wali nikah, dua orang saksi, ijab-qabul, dan mahar. Pesta pernikahan (walimah) dan restu tetangga bukan termasuk rukun."
-  },
-  {
-    q: "Seorang perempuan yang menjadi wali nikah dari pihak ayah disebut wali…",
-    opts: ["Wali hakim","Wali muhakkam","Wali nasab","Wali mujbir"],
-    ans: 2,
-    explain: "Wali nasab adalah wali yang berasal dari jalur keturunan (nasab), seperti ayah, kakek, saudara laki-laki, paman, dan seterusnya. Wali hakim digunakan bila tidak ada wali nasab yang memenuhi syarat."
-  },
-  {
-    q: "Pernyataan berikut yang benar tentang mahar adalah…",
-    opts: ["Mahar adalah milik orang tua pengantin perempuan","Mahar wajib berupa emas atau uang tunai","Mahar adalah hak penuh milik istri dan tidak boleh diambil paksa","Jumlah mahar ditentukan oleh pemerintah"],
-    ans: 2,
-    explain: "Mahar adalah hak penuh milik istri. Islam tidak membatasi bentuk mahar — bisa emas, uang, hafalan Al-Qur'an, atau benda bernilai lainnya. Yang terpenting mahar tidak memberatkan dan diserahkan dengan ikhlas."
-  },
-  {
-    q: "Ta'aruf dalam konteks pernikahan Islam berarti…",
-    opts: ["Pacaran selama minimal 6 bulan sebelum menikah","Proses perkenalan dengan niat serius menikah secara syar'i dan didampingi mahram","Pertemuan antara dua keluarga untuk membicarakan mas kawin","Proses lamaran resmi yang dilakukan di Kantor Urusan Agama"],
-    ans: 1,
-    explain: "Ta'aruf adalah proses mengenal calon pasangan dengan niat yang serius untuk menikah, dilakukan secara syar'i (tidak berduaan/khalwat), dan didampingi mahram atau keluarga. Berbeda dengan pacaran yang tidak memiliki dasar syar'i."
-  },
-  {
-    q: "Wanita yang TIDAK boleh dinikahi karena sebab <em>mushaharah</em> (ikatan pernikahan) adalah…",
-    opts: ["Sepupu perempuan dari pihak ayah","Ibu mertua dan istri dari anak kandung","Adik ipar yang belum menikah","Teman dekat mantan istri"],
-    ans: 1,
-    explain: "Mushaharah (ikatan pernikahan) menjadikan ibu mertua dan istri anak kandung haram dinikahi untuk selamanya. Ini berbeda dengan mahram sebab nasab, namun sama-sama haram dinikahi."
-  },
-  {
-    q: "Dalam QS. Ar-Rum: 21, Allah SWT menyebutkan tiga tujuan penciptaan pasangan. Tujuan utama yang disebutkan pertama kali adalah…",
-    opts: ["Agar manusia memperbanyak keturunan","Agar manusia merasa tenteram (sakinah)","Agar manusia menghindari kemiskinan","Agar manusia memiliki status sosial yang baik"],
-    ans: 1,
-    explain: "QS. Ar-Rum: 21 menyebut litaskunuu ilaihaa — agar kamu merasa tenteram kepadanya. Ini menjadi tujuan utama yang disebutkan, yaitu ketenangan jiwa (sakinah) bersama pasangan."
-  },
-  {
-    q: "Kewajiban seorang suami yang berkaitan dengan bimbingan agama dalam keluarga adalah…",
-    opts: ["Menyerahkan seluruh urusan agama kepada istri","Menjadi imam shalat dan pemimpin pendidikan Islam di rumah","Cukup membayar mahar saat akad nikah","Mendaftarkan anak ke pesantren sejak dini"],
-    ans: 1,
-    explain: "Salah satu kewajiban utama suami adalah menjadi qawwam (pemimpin) dalam urusan agama keluarga, termasuk menjadi imam shalat dan membimbing istri serta anak-anak dalam pendidikan Islam."
-  },
-  {
-    q: "Ketika terjadi nusyuz (ketidakharmonisan) dalam rumah tangga, urutan langkah yang diajarkan Al-Qur'an adalah…",
-    opts: ["Langsung mengajukan cerai ke pengadilan agama","Nasihat dengan lembut → pisah ranjang sementara → mediasi keluarga","Meminta pendapat tetangga → melapor ke RT → perceraian","Diam saja dan bersabar tanpa mengambil tindakan apapun"],
-    ans: 1,
-    explain: "Al-Qur'an dalam QS. An-Nisa: 34-35 mengajarkan tiga langkah bertahap: (1) memberi nasihat dengan lembut, (2) pisah ranjang sementara, dan (3) jika masih berlanjut, menghadirkan mediator (hakam) dari kedua keluarga. Perceraian adalah pintu paling terakhir."
-  }
-];
-
-let userAnswers = {};
-
-function buildQuiz() {
-  const container = document.getElementById('quiz-container');
-  container.innerHTML = '';
-  questions.forEach((q, i) => {
-    const letters = ['A','B','C','D'];
-    const optsHTML = q.opts.map((o, j) => `
-      <li>
-        <input type="radio" name="q${i}" id="q${i}o${j}" value="${j}">
-        <label for="q${i}o${j}">
-          <span class="opt-letter">${letters[j]}</span>
-          <span>${o}</span>
-        </label>
-      </li>
-    `).join('');
-    container.innerHTML += `
-      <div class="q-block" id="qblock${i}">
-        <div class="q-num">Soal ${i+1} dari ${questions.length}</div>
-        <div class="q-text">${q.q}</div>
-        <ul class="q-options">${optsHTML}</ul>
-        <div class="q-feedback" id="feedback${i}"></div>
-      </div>
-    `;
-  });
-  // listen for changes
-  questions.forEach((_, i) => {
-    document.querySelectorAll(`input[name="q${i}"]`).forEach(r => {
-      r.addEventListener('change', () => { userAnswers[i] = parseInt(r.value); });
-    });
-  });
-}
-
-function checkAnswers() {
-  let score = 0;
-  let unanswered = [];
-  questions.forEach((q, i) => {
-    if (userAnswers[i] === undefined) { unanswered.push(i+1); return; }
-    const fb = document.getElementById(`feedback${i}`);
-    fb.style.display = 'block';
-    if (userAnswers[i] === q.ans) {
-      score++;
-      fb.className = 'q-feedback correct';
-      fb.innerHTML = `✅ <strong>Benar!</strong> ${q.explain}`;
-    } else {
-      fb.className = 'q-feedback wrong';
-      const letters = ['A','B','C','D'];
-      fb.innerHTML = `❌ <strong>Kurang tepat.</strong> Jawaban yang benar adalah <strong>${letters[q.ans]}. ${q.opts[q.ans]}</strong>. ${q.explain}`;
+const pageFlip = new St.PageFlip(
+    document.getElementById("flipbook"),
+    {
+        width: 500,
+        height: 650,
+        size: "stretch",
+        minWidth: 315,
+        maxWidth: 1000,
+        minHeight: 400,
+        maxHeight: 1500,
+        maxShadowOpacity: 0.5,
+        showCover: true,
+        mobileScrollSupport: true
     }
-  });
-  if (unanswered.length > 0) {
-    alert(`Kamu belum menjawab soal nomor: ${unanswered.join(', ')}. Jawab semua soal terlebih dahulu ya!`);
-    return;
-  }
-  const pct = Math.round((score / questions.length) * 100);
-  let msg = '';
-  if (pct >= 90) msg = 'MasyaAllah! Nilaimu sangat memuaskan. Kamu benar-benar memahami materi pernikahan dalam Islam dengan baik. 🌟';
-  else if (pct >= 70) msg = 'Bagus! Pemahamanmu sudah cukup baik. Pelajari kembali soal yang belum tepat untuk memperdalam pemahaman. 👍';
-  else if (pct >= 50) msg = 'Lumayan! Masih ada beberapa konsep yang perlu diperdalam. Baca ulang setiap bab dan coba lagi. 📖';
-  else msg = 'Jangan menyerah! Bacalah kembali materi dari awal dengan teliti, lalu coba kerjakan soal ini lagi. Semangat! 💪';
+);
 
-  const resultBox = document.getElementById('result-box');
-  resultBox.style.display = 'block';
-  resultBox.innerHTML = `
-    <div class="result-box-inner">
-      <div class="result-score">${score}/${questions.length}</div>
-      <div class="result-label">Nilai Akhir · ${pct}</div>
-      <div class="result-msg">${msg}</div>
-    </div>
-  `;
-  resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  document.getElementById('btn-check').style.display = 'none';
-}
-
-function resetQuiz() {
-  userAnswers = {};
-  questions.forEach((_, i) => {
-    const fb = document.getElementById(`feedback${i}`);
-    if (fb) { fb.style.display = 'none'; fb.innerHTML = ''; }
-    document.querySelectorAll(`input[name="q${i}"]`).forEach(r => r.checked = false);
-    const block = document.getElementById(`qblock${i}`);
-    if (block) { block.style.borderColor = ''; block.style.background = ''; }
-  });
-  document.getElementById('result-box').style.display = 'none';
-  document.getElementById('btn-check').style.display = 'inline-block';
-  window.scrollTo({ top: document.getElementById('quiz-container').offsetTop - 60, behavior: 'smooth' });
-}
-
-buildQuiz();
+pageFlip.loadFromHTML(
+    document.querySelectorAll(".page")
+);
 </script>
-
-<!-- ══════════════════════════════════════
-     PENUTUP
-══════════════════════════════════════ -->
-<div class="closing">
-  <div class="closing-arabic">رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ</div>
-  <div class="closing-line"></div>
-  <h3>Doa Penutup</h3>
-  <p>"Ya Tuhan kami, anugerahkanlah kepada kami pasangan kami dan keturunan kami sebagai penyenang hati kami, dan jadikanlah kami pemimpin bagi orang-orang yang bertakwa."</p>
-  <p style="margin-top:8px; font-size:13px; letter-spacing:1px;">(QS. Al-Furqan: 74)</p>
-  <div class="closing-line"></div>
-  <p>Semoga ebook sederhana ini membawa manfaat dan menjadi bekal dalam membangun rumah tangga yang diridhoi Allah SWT. Aamiin Ya Rabbal 'Alamin.</p>
-</div>
 
 </body>
 </html>
